@@ -1,0 +1,32 @@
+CTI-WEB
+
+sudo docker swarm leave --force
+sudo docker stop portainer_agent
+dpkg -l | grep -i docker
+sudo apt-get purge -y docker-engine docker docker.io docker-ce docker-ce-cli docker-compose-plugin
+dpkg -l | grep -i docker
+sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce docker-compose-plugin
+sudo rm -rf /var/lib/docker /etc/docker
+sudo rm /etc/apparmor.d/docker
+sudo groupdel docker
+sudo rm -rf /var/run/docker.sock
+sudo find / -name '*portainer*'
+sudo find / -name '*portainer*' -exec rm -rf {} \;
+
+
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose
+sudo usermod -aG docker $USER
+docker swarm init --advertise-addr 172.16.21.74
+sudo mkdir -p /opt/portainer && cd /opt/portainer
+sudo curl -L https://downloads.portainer.io/portainer-agent-stack.yml -o portainer-agent-stack.yml
+sudo nano portainer-agent-stack.yml
+sudo docker stack deploy --compose-file=portainer-agent-stack.yml portainer

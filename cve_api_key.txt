@@ -1,0 +1,6 @@
+NVD API Key Activated
+Thank you for confirming your request for an NVD API key. Please securely save this key. Once you close or leave this page, the key will no longer be accessible from this link. If you lose or forget your API key you must request a new one. There is no process for recovering an API Key.
+
+API Key: 758ef74a-95c6-4048-8a68-3561da81e83e  
+
+To request a new API key, please resubmit an API Key Request. Please note that activating a new key will deactivate the key shown above.
